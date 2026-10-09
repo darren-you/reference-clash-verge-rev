@@ -1,17 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", ":disableDependencyDashboard"],
-  "baseBranchPatterns": ["dev"],
+  "extends": [
+    "config:recommended",
+    ":disableDependencyDashboard"
+  ],
+  "baseBranchPatterns": [
+    "master"
+  ],
   "enabledManagers": [
     "asdf",
     "cargo",
     "custom.regex",
     "devcontainer",
-    "github-actions",
     "npm",
     "rust-toolchain"
   ],
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "ignorePaths": [
     "**/node_modules/**",
     "**/bower_components/**",
@@ -27,50 +33,47 @@
   "internalChecksFilter": "strict",
   "packageRules": [
     {
-      "matchUpdateTypes": ["patch"],
+      "matchUpdateTypes": [
+        "patch"
+      ],
       "automerge": true
     },
     {
-      "matchPackageNames": ["*"],
+      "matchPackageNames": [
+        "*"
+      ],
       "semanticCommitType": "chore"
     },
     {
       "description": "Group all cargo dependencies into a single PR and bump Cargo.toml ranges",
-      "matchManagers": ["cargo"],
+      "matchManagers": [
+        "cargo"
+      ],
       "groupName": "cargo dependencies",
       "rangeStrategy": "bump"
     },
     {
       "description": "Group all npm dependencies into a single PR",
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "groupName": "npm dependencies"
     },
     {
-      "description": "Group all GitHub Actions updates into a single PR",
-      "matchManagers": ["github-actions"],
-      "groupName": "github actions"
-    },
-    {
-      "description": "Recompile generated agentic workflows with gh aw compile instead of updating individual action pins",
-      "matchManagers": ["github-actions"],
-      "matchFileNames": [".github/workflows/*.lock.yml"],
-      "enabled": false
-    },
-    {
-      "description": "Ignore gh-aw dependency updates in workflow files; upgrade agentic workflows with gh aw upgrade instead",
-      "matchFileNames": [".github/workflows/**"],
-      "matchPackageNames": ["/gh-aw/"],
-      "enabled": false
-    },
-    {
       "description": "Skip TypeScript 7.0 series",
-      "matchManagers": ["npm"],
-      "matchPackageNames": ["typescript"],
+      "matchManagers": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "typescript"
+      ],
       "allowedVersions": "<7.0.0 || >=7.1.0"
     },
     {
       "description": "Prevent project from supply chain attack",
-      "matchDatasources": ["npm"],
+      "matchDatasources": [
+        "npm"
+      ],
       "minimumReleaseAge": "1 days"
     },
     {
@@ -84,7 +87,9 @@
     },
     {
       "description": "Group PNPM version updates across package.json, tool-versions, workflows, and devcontainer",
-      "matchPackageNames": ["pnpm"],
+      "matchPackageNames": [
+        "pnpm"
+      ],
       "groupName": "pnpm"
     },
     {
@@ -100,28 +105,10 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Update Node.js in GitHub Workflows",
-      "fileMatch": ["^\\.github/workflows/.*\\.ya?ml$"],
-      "matchStrings": [
-        "node-version:\\s*['\"]?(?<currentValue>\\d+\\.\\d+\\.\\d+)['\"]?"
-      ],
-      "depNameTemplate": "node",
-      "datasourceTemplate": "node-version"
-    },
-    {
-      "customType": "regex",
-      "description": "Update Rust toolchain in GitHub Workflows",
-      "fileMatch": ["^\\.github/workflows/.*\\.ya?ml$"],
-      "matchStrings": [
-        "(?:toolchain:\\s*['\"]|--toolchain\\s+|dtolnay/rust-toolchain@)(?<currentValue>\\d+\\.\\d+\\.\\d+)['\"]?"
-      ],
-      "depNameTemplate": "rust-lang/rust",
-      "datasourceTemplate": "github-releases"
-    },
-    {
-      "customType": "regex",
       "description": "Update Node.js in devcontainer.json",
-      "fileMatch": ["^\\.devcontainer/devcontainer\\.json$"],
+      "fileMatch": [
+        "^\\.devcontainer/devcontainer\\.json$"
+      ],
       "matchStrings": [
         "\"ghcr\\.io/devcontainers/features/node:[^\"]+\":\\s*\\{[^}]*\"version\":\\s*\"(?<currentValue>[^\"]+)\""
       ],
@@ -131,7 +118,9 @@
     {
       "customType": "regex",
       "description": "Update Rust in devcontainer.json",
-      "fileMatch": ["^\\.devcontainer/devcontainer\\.json$"],
+      "fileMatch": [
+        "^\\.devcontainer/devcontainer\\.json$"
+      ],
       "matchStrings": [
         "\"ghcr\\.io/devcontainers/features/rust:[^\"]+\":\\s*\\{[^}]*\"version\":\\s*\"(?<currentValue>[^\"]+)\""
       ],
@@ -141,7 +130,9 @@
     {
       "customType": "regex",
       "description": "Update pnpm in devcontainer.json",
-      "fileMatch": ["^\\.devcontainer/devcontainer\\.json$"],
+      "fileMatch": [
+        "^\\.devcontainer/devcontainer\\.json$"
+      ],
       "matchStrings": [
         "\"ghcr\\.io/devcontainers/features/node:[^\"]+\":\\s*\\{[^}]*\"pnpmVersion\":\\s*\"(?<currentValue>[^\"]+)\""
       ],
@@ -149,12 +140,18 @@
       "datasourceTemplate": "npm"
     }
   ],
-  "postUpdateOptions": ["pnpmDedupe"],
-  "ignoreDeps": ["criterion"],
+  "postUpdateOptions": [
+    "pnpmDedupe"
+  ],
+  "ignoreDeps": [
+    "criterion"
+  ],
   "lockFileMaintenance": {
     "enabled": true,
     "description": "Force update lockfile to track latest commits of git dependencies",
-    "schedule": ["* 0-4 1 * *"],
+    "schedule": [
+      "* 0-4 1 * *"
+    ],
     "automerge": true
   }
 }

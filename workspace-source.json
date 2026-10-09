@@ -1,0 +1,7 @@
+{
+  "upstream_repository": "https://github.com/clash-verge-rev/clash-verge-rev",
+  "upstream_commit": "52d616302ca518256b8873aab892af08f8cea5c0",
+  "purpose": "工作区只读参考；移除 GitHub Actions 及其专属发布、生成和更新接线",
+  "source_owner": "darren-space",
+  "source_issue": "https://github.com/darren-you/darren-space/issues/64"
+}
